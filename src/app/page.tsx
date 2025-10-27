@@ -82,15 +82,25 @@ export default function Home() {
           <p className="text-gray-600 mb-8">
             강릉시의 깨끗한 환경을 위해 함께해요
           </p>
-          <div className="flex gap-4 justify-center">
-            <Link href="/classify">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-2xl mx-auto">
+            <Link href="/classify" className="flex-1">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 w-full">
                 쓰레기 분류하기
               </Button>
             </Link>
-            <Link href="/schedule">
-              <Button size="lg" variant="outline">
+            <Link href="/schedule" className="flex-1">
+              <Button size="lg" variant="outline" className="w-full">
                 배출 일정 보기
+              </Button>
+            </Link>
+            <Link href="/points" className="flex-1">
+              <Button size="lg" variant="outline" className="w-full">
+                포인트 확인
+              </Button>
+            </Link>
+            <Link href="/mypage" className="flex-1">
+              <Button size="lg" variant="outline" className="w-full">
+                마이페이지
               </Button>
             </Link>
           </div>
