@@ -26,12 +26,13 @@ const SHEETS = {
 
 // ===== Users =====
 
-export async function createUser(userData: CreateUserInput & { id: string }): Promise<void> {
+export async function createUser(userData: CreateUserInput & { id: string; passwordHash: string }): Promise<void> {
   const now = new Date().toISOString();
   const values = [[
     userData.id,
     userData.name,
     userData.email,
+    userData.passwordHash, // 해시된 비밀번호
     userData.phone || '',
     userData.address,
     userData.address_detail || '',
@@ -46,7 +47,7 @@ export async function createUser(userData: CreateUserInput & { id: string }): Pr
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${SHEETS.USERS}!A:M`,
+    range: `${SHEETS.USERS}!A:N`, // 확장: password_hash 포함
     valueInputOption: 'USER_ENTERED',
     requestBody: { values },
   });
@@ -55,7 +56,7 @@ export async function createUser(userData: CreateUserInput & { id: string }): Pr
 export async function getUserByEmail(email: string): Promise<User | null> {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${SHEETS.USERS}!A:M`,
+    range: `${SHEETS.USERS}!A:N`, // 확장: password_hash 포함
   });
 
   const rows = response.data.values;
@@ -71,7 +72,7 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 export async function getUserById(userId: string): Promise<User | null> {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${SHEETS.USERS}!A:M`,
+    range: `${SHEETS.USERS}!A:N`, // 확장: password_hash 포함
   });
 
   const rows = response.data.values;
@@ -111,16 +112,17 @@ function parseUserRow(row: any[]): User {
     id: row[0],
     name: row[1],
     email: row[2],
-    phone: row[3] || undefined,
-    address: row[4],
-    address_detail: row[5] || undefined,
-    latitude: row[6] ? parseFloat(row[6]) : undefined,
-    longitude: row[7] ? parseFloat(row[7]) : undefined,
-    total_points: parseInt(row[8]) || 0,
-    language: row[9] as 'ko' | 'en' | 'zh' | 'ja',
-    push_enabled: row[10] === 'TRUE',
-    created_at: row[11],
-    updated_at: row[12],
+    password_hash: row[3] || '', // 해시된 비밀번호
+    phone: row[4] || undefined,
+    address: row[5],
+    address_detail: row[6] || undefined,
+    latitude: row[7] ? parseFloat(row[7]) : undefined,
+    longitude: row[8] ? parseFloat(row[8]) : undefined,
+    total_points: parseInt(row[9]) || 0,
+    language: row[10] as 'ko' | 'en' | 'zh' | 'ja',
+    push_enabled: row[11] === 'TRUE',
+    created_at: row[12],
+    updated_at: row[13],
   };
 }
 
