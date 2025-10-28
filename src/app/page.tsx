@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Camera, Calendar, Gift, Sparkles, Leaf, Users, ArrowRight, Recycle, Clock, Award, Zap, Shield, Heart } from "lucide-react";
+import { Camera, Calendar, Gift, Sparkles, Leaf, Users, ArrowRight, Recycle, Clock, Award, Zap, Shield, Heart, LogIn, UserPlus } from "lucide-react";
 
 export default function Home() {
   return (
@@ -13,6 +13,26 @@ export default function Home() {
           <div className="absolute inset-0" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}></div>
+        </div>
+
+        {/* Navigation Header */}
+        <div className="absolute top-0 left-0 right-0 z-20">
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex justify-end gap-3">
+              <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm" asChild>
+                <Link href="/auth/login">
+                  <LogIn className="mr-2 h-4 w-4" />
+                  로그인
+                </Link>
+              </Button>
+              <Button size="sm" className="bg-white text-green-600 hover:bg-green-50" asChild>
+                <Link href="/auth/signup">
+                  <UserPlus className="mr-2 h-4 w-4" />
+                  회원가입
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">

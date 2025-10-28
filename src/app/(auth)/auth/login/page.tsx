@@ -43,6 +43,30 @@ export default function LoginPage() {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const result = await signIn('credentials', {
+        email: 'demo@cleanneung.kr',
+        password: 'demo1234',
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError('데모 계정 로그인에 실패했습니다.');
+      } else if (result?.ok) {
+        router.push('/');
+        router.refresh();
+      }
+    } catch (err) {
+      setError('로그인 중 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
@@ -58,16 +82,35 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {/* 데모 계정 안내 */}
-          <Alert className="mb-4 bg-blue-50 border-blue-200">
-            <AlertDescription className="text-sm text-blue-900">
-              <div className="font-semibold mb-1">🎯 데모 계정으로 테스트하기</div>
-              <div className="space-y-1 text-xs">
-                <div>이메일: <code className="bg-blue-100 px-1 py-0.5 rounded">demo@cleanneung.kr</code></div>
-                <div>비밀번호: <code className="bg-blue-100 px-1 py-0.5 rounded">demo1234</code></div>
+          {/* 데모 계정 빠른 로그인 */}
+          <div className="mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <div className="font-semibold text-blue-900 mb-1">🎯 데모 계정으로 바로 시작하기</div>
+                <div className="text-xs text-blue-700">
+                  테스트용 계정으로 모든 기능을 체험해보세요
+                </div>
               </div>
-            </AlertDescription>
-          </Alert>
+            </div>
+            <Button
+              type="button"
+              onClick={handleDemoLogin}
+              disabled={isLoading}
+              className="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  로그인 중...
+                </>
+              ) : (
+                <>
+                  <LogIn className="mr-2 h-4 w-4" />
+                  데모 계정으로 로그인
+                </>
+              )}
+            </Button>
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
