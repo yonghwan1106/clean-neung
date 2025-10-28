@@ -8,26 +8,31 @@ export default function SchedulePage() {
   const schedules = GANGNEUNG_SCHEDULES.default;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* 헤더 */}
         <div className="mb-8">
           <Link href="/">
-            <Button variant="ghost" className="mb-4">
+            <Button variant="ghost" className="mb-4 hover:bg-green-100">
               <ArrowLeft className="mr-2 h-4 w-4" />
               홈으로
             </Button>
           </Link>
-          <h1 className="text-4xl font-bold text-green-600 mb-2">배출 일정</h1>
-          <p className="text-gray-600">강릉시 쓰레기 배출 일정을 확인하세요</p>
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">
+            배출 일정
+          </h1>
+          <p className="text-lg text-gray-600">강릉시 쓰레기 배출 일정을 한눈에 확인하세요</p>
         </div>
 
         {/* 지역 정보 */}
-        <Card className="mb-6 bg-blue-50 border-blue-200">
+        <Card className="mb-8 bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200 shadow-lg">
           <CardHeader>
-            <CardTitle className="text-blue-900">📍 교동 기준</CardTitle>
-            <CardDescription className="text-blue-700">
-              모든 동 동일한 배출 일정 적용
+            <CardTitle className="text-blue-900 flex items-center gap-2">
+              <Calendar className="h-6 w-6" />
+              📍 교동 기준
+            </CardTitle>
+            <CardDescription className="text-blue-700 text-base">
+              모든 동 동일한 배출 일정 적용됩니다
             </CardDescription>
           </CardHeader>
         </Card>
@@ -35,20 +40,23 @@ export default function SchedulePage() {
         {/* 일정 카드들 */}
         <div className="space-y-4">
           {/* 재활용 */}
-          <Card className="border-green-200">
+          <Card className="border-2 border-green-300 hover:shadow-xl transition-shadow bg-gradient-to-br from-white to-green-50">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                ♻️ {schedules.recyclable.category}
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-2xl shadow-md">
+                  ♻️
+                </div>
+                {schedules.recyclable.category}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-4">
               <div>
-                <div className="text-sm text-gray-600 mb-2">배출 요일</div>
+                <div className="text-sm text-gray-600 mb-2 font-semibold">배출 요일</div>
                 <div className="flex flex-wrap gap-2">
                   {schedules.recyclable.days.map((day, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium"
+                      className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-sm font-semibold shadow-md"
                     >
                       {day}
                     </span>
@@ -56,11 +64,11 @@ export default function SchedulePage() {
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-600 mb-1">배출 시간</div>
-                <div className="text-base font-semibold">{schedules.recyclable.time}</div>
+                <div className="text-sm text-gray-600 mb-1 font-semibold">배출 시간</div>
+                <div className="text-lg font-bold text-green-700">{schedules.recyclable.time}</div>
               </div>
               <div className="pt-2">
-                <Button variant="outline" size="sm" className="w-full">
+                <Button variant="outline" size="sm" className="w-full border-2 border-green-500 text-green-700 hover:bg-green-50">
                   <Bell className="mr-2 h-4 w-4" />
                   알림 설정
                 </Button>

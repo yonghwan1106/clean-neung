@@ -50,32 +50,34 @@ export default function PointsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">포인트 정보를 불러오는 중...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-green-600 mx-auto mb-4"></div>
+          <p className="text-lg text-gray-600 font-medium">포인트 정보를 불러오는 중...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* 헤더 */}
         <div className="mb-8">
           <Link href="/">
-            <Button variant="ghost" className="mb-4">
+            <Button variant="ghost" className="mb-4 hover:bg-green-100">
               <ArrowLeft className="mr-2 h-4 w-4" />
               홈으로
             </Button>
           </Link>
-          <h1 className="text-4xl font-bold text-green-600 mb-2">포인트</h1>
-          <p className="text-gray-600">올바른 분리수거로 적립한 포인트를 확인하세요</p>
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">
+            포인트
+          </h1>
+          <p className="text-lg text-gray-600">올바른 분리수거로 적립한 포인트를 확인하세요</p>
         </div>
 
         {/* 포인트 요약 */}
-        <Card className="mb-6 bg-gradient-to-br from-green-500 to-green-600 text-white">
+        <Card className="mb-8 bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-2xl border-0">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-white">
               <Gift className="h-6 w-6" />
