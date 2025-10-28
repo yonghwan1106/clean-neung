@@ -11,12 +11,8 @@ async function addDemoAccount() {
     // Google Sheets 설정
     const auth = new google.auth.GoogleAuth({
       credentials: {
-        type: 'service_account',
-        project_id: process.env.GOOGLE_PROJECT_ID!,
-        private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID!,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n') || '',
-        client_email: process.env.GOOGLE_CLIENT_EMAIL!,
-        client_id: process.env.GOOGLE_CLIENT_ID!,
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
       },
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
@@ -47,7 +43,7 @@ async function addDemoAccount() {
     // 기존 데모 계정 확인
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: 'Users!A:N',
+      range: 'users!A:N',
     });
 
     const rows = response.data.values || [];
@@ -58,8 +54,8 @@ async function addDemoAccount() {
       console.log('데모 계정이 이미 존재합니다. 업데이트합니다...');
       await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: `Users!A${demoUserIndex + 1}:N${demoUserIndex + 1}`,
-        valueInputOption: 'RAW',
+        range: `users!A${demoUserIndex + 1}:N${demoUserIndex + 1}`,
+        valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
             [
@@ -70,13 +66,13 @@ async function addDemoAccount() {
               demoUser.phone,
               demoUser.address,
               demoUser.address_detail,
-              demoUser.language,
+              '', // latitude
+              '', // longitude
               demoUser.total_points,
-              demoUser.is_active,
-              now, // created_at (유지)
+              demoUser.language,
+              'TRUE', // push_enabled
+              now, // created_at
               now, // updated_at
-              '', // last_login_at
-              '', // fcm_token
             ],
           ],
         },
@@ -86,8 +82,8 @@ async function addDemoAccount() {
       console.log('데모 계정을 추가합니다...');
       await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: 'Users!A:N',
-        valueInputOption: 'RAW',
+        range: 'users!A:N',
+        valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
             [
@@ -98,13 +94,13 @@ async function addDemoAccount() {
               demoUser.phone,
               demoUser.address,
               demoUser.address_detail,
-              demoUser.language,
+              '', // latitude
+              '', // longitude
               demoUser.total_points,
-              demoUser.is_active,
+              demoUser.language,
+              'TRUE', // push_enabled
               now, // created_at
               now, // updated_at
-              '', // last_login_at
-              '', // fcm_token
             ],
           ],
         },

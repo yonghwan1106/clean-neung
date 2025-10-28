@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Gift, TrendingUp, Calendar } from 'lucide-react';
 import type { Point } from '@/lib/types/waste';
 
-// 테스트용 User ID
-const TEST_USER_ID = 'usr_test_001';
+// 테스트용 User ID (세션이 없을 때 사용)
+const TEST_USER_ID = 'usr_demo_001';
 
 export default function PointsPage() {
+  const { data: session } = useSession();
   const [totalPoints, setTotalPoints] = useState<number>(0);
   const [pointsHistory, setPointsHistory] = useState<Point[]>([]);
   const [thisMonthEarned, setThisMonthEarned] = useState<number>(0);
@@ -18,11 +20,14 @@ export default function PointsPage() {
 
   useEffect(() => {
     fetchPointsData();
-  }, []);
+  }, [session]);
 
   const fetchPointsData = async () => {
     try {
-      const response = await fetch(`/api/points?userId=${TEST_USER_ID}`);
+      // 세션에서 사용자 ID 가져오기, 없으면 테스트용 ID 사용
+      const userId = session?.user?.id || TEST_USER_ID;
+
+      const response = await fetch(`/api/points?userId=${userId}`);
       const data = await response.json();
 
       if (data.success) {

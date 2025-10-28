@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,10 +9,11 @@ import { ArrowLeft, User, MapPin, Gift, BarChart3, Calendar, Languages } from 'l
 import type { User as UserType } from '@/lib/types/user';
 import type { WasteLog } from '@/lib/types/waste';
 
-// 테스트용 User ID
-const TEST_USER_ID = 'usr_test_001';
+// 테스트용 User ID (세션이 없을 때 사용)
+const TEST_USER_ID = 'usr_demo_001';
 
 export default function MyPage() {
+  const { data: session } = useSession();
   const [user, setUser] = useState<UserType | null>(null);
   const [recentLogs, setRecentLogs] = useState<WasteLog[]>([]);
   const [stats, setStats] = useState({
@@ -23,12 +25,15 @@ export default function MyPage() {
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [session]);
 
   const fetchUserData = async () => {
     try {
+      // 세션에서 사용자 ID 가져오기, 없으면 테스트용 ID 사용
+      const userId = session?.user?.id || TEST_USER_ID;
+
       // 사용자 정보 가져오기
-      const userResponse = await fetch(`/api/user/${TEST_USER_ID}`);
+      const userResponse = await fetch(`/api/user/${userId}`);
       const userData = await userResponse.json();
 
       if (userData.success) {
