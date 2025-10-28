@@ -76,18 +76,20 @@ export default function ClassifyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* 헤더 */}
         <div className="mb-8">
           <Link href="/">
-            <Button variant="ghost" className="mb-4">
+            <Button variant="ghost" className="mb-4 hover:bg-green-100">
               <ArrowLeft className="mr-2 h-4 w-4" />
               홈으로
             </Button>
           </Link>
-          <h1 className="text-4xl font-bold text-green-600 mb-2">쓰레기 분류</h1>
-          <p className="text-gray-600">AI가 사진을 분석하여 분리수거 방법을 알려드립니다</p>
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">
+            쓰레기 분류
+          </h1>
+          <p className="text-lg text-gray-600">AI가 사진을 분석하여 정확한 분리수거 방법을 안내합니다</p>
         </div>
 
         {/* 상태별 렌더링 */}
@@ -101,10 +103,10 @@ export default function ClassifyPage() {
             {selectedImage && (
               <Button
                 onClick={handleClassify}
-                className="w-full bg-green-600 hover:bg-green-700"
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 shadow-lg shadow-green-200"
                 size="lg"
               >
-                AI 분류 시작하기
+                🤖 AI 분류 시작하기
               </Button>
             )}
           </div>
