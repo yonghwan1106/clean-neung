@@ -58,6 +58,17 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {/* 데모 계정 안내 */}
+          <Alert className="mb-4 bg-blue-50 border-blue-200">
+            <AlertDescription className="text-sm text-blue-900">
+              <div className="font-semibold mb-1">🎯 데모 계정으로 테스트하기</div>
+              <div className="space-y-1 text-xs">
+                <div>이메일: <code className="bg-blue-100 px-1 py-0.5 rounded">demo@cleanneung.kr</code></div>
+                <div>비밀번호: <code className="bg-blue-100 px-1 py-0.5 rounded">demo1234</code></div>
+              </div>
+            </AlertDescription>
+          </Alert>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <Alert variant="destructive">
