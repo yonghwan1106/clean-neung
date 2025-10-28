@@ -1,5 +1,15 @@
 # 배포 가이드
 
+## 현재 배포 상태
+
+- **프로덕션 URL**: https://clean-neung-qeu9tcn5c-yongparks-projects.vercel.app
+- **플랫폼**: Vercel
+- **배포 날짜**: 2025-10-28
+- **자동 배포**: ✅ `main` 브랜치 푸시 시 자동 배포
+- **환경 변수**: ✅ 13개 설정 완료
+
+---
+
 ## 1. GitHub 저장소 설정
 
 ### 1-1. GitHub에서 새 저장소 생성
@@ -323,18 +333,23 @@ git push origin main
 
 1. **배포 URL 공유**
    ```
-   https://clean-neung.vercel.app
+   https://clean-neung-qeu9tcn5c-yongparks-projects.vercel.app
    ```
 
-2. **README 업데이트**
-   - 배포 URL 추가
-   - 데모 링크 추가
+2. **README 업데이트** ✅
+   - 배포 URL 추가 완료
+   - 데모 링크 추가 완료
 
-3. **테스트 진행**
-   - 다양한 기기에서 테스트
-   - 실제 사용자 피드백 수집
+3. **테스트 진행** ✅
+   - 홈페이지: 정상 작동
+   - 포인트 페이지: 정상 작동
+   - 마이페이지: 정상 작동
+   - 배출 일정: 정상 작동
+   - 모바일 네비게이션: 정상 작동
 
-4. **다음 단계**
-   - 인증 시스템 추가
-   - 포인트/마이페이지 구현
-   - Phase 2 기능 개발
+4. **다음 단계** (우선순위 1)
+   - NextAuth.js 인증 시스템 추가 (진행 예정)
+   - 이미지 업로드 UI 완성
+   - 커스텀 도메인 연결 (cleanneung.kr)
+   - Google Analytics 설정
+   - Sentry 에러 모니터링
