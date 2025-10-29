@@ -27,16 +27,22 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-6">
-              <span className="flex items-center gap-1">
+              <Link href="/" className="flex items-center gap-1 text-white font-bold hover:text-blue-100">
                 <Globe className="h-3 w-3" />
-                <span>KOR</span>
-              </span>
+                KOR
+              </Link>
               <span className="text-blue-200">|</span>
-              <span className="text-blue-200 hover:text-white cursor-pointer">ENG</span>
+              <Link href="/en" className="text-blue-200 hover:text-white">
+                ENG
+              </Link>
               <span className="text-blue-200">|</span>
-              <span className="text-blue-200 hover:text-white cursor-pointer">CHN</span>
+              <Link href="/zh" className="text-blue-200 hover:text-white">
+                CHN
+              </Link>
               <span className="text-blue-200">|</span>
-              <span className="text-blue-200 hover:text-white cursor-pointer">JPN</span>
+              <Link href="/ja" className="text-blue-200 hover:text-white">
+                JPN
+              </Link>
             </div>
             <div className="flex gap-4 items-center">
               {session ? (
