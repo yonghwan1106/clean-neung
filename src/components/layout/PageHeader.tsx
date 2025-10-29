@@ -11,31 +11,31 @@ interface LanguageSelectorProps {
 }
 
 export function LanguageSelector({ onLanguageChange }: LanguageSelectorProps) {
-  const [currentLang, setCurrentLang] = useState('KOR');
-
-  const handleLanguageChange = (lang: string) => {
-    setCurrentLang(lang);
-    if (onLanguageChange) {
-      onLanguageChange(lang);
-    }
-    // 실제로는 여기서 i18n 컨텍스트의 언어를 변경해야 합니다
-    localStorage.setItem('language', lang.toLowerCase());
+  const languageRoutes = {
+    KOR: '/',
+    ENG: '/en',
+    CHN: '/zh',
+    JPN: '/ja',
   };
 
   return (
     <div className="flex gap-6">
-      {['KOR', 'ENG', 'CHN', 'JPN'].map((lang) => (
-        <span
-          key={lang}
-          className={`flex items-center gap-1 cursor-pointer ${
-            currentLang === lang ? 'text-white font-bold' : 'text-blue-200 hover:text-white'
-          }`}
-          onClick={() => handleLanguageChange(lang)}
-        >
-          {lang === 'KOR' && <Globe className="h-3 w-3" />}
-          {lang}
-        </span>
-      ))}
+      <Link href={languageRoutes.KOR} className="flex items-center gap-1 text-white font-bold hover:text-blue-100">
+        <Globe className="h-3 w-3" />
+        KOR
+      </Link>
+      <span className="text-blue-200">|</span>
+      <Link href={languageRoutes.ENG} className="text-blue-200 hover:text-white">
+        ENG
+      </Link>
+      <span className="text-blue-200">|</span>
+      <Link href={languageRoutes.CHN} className="text-blue-200 hover:text-white">
+        CHN
+      </Link>
+      <span className="text-blue-200">|</span>
+      <Link href={languageRoutes.JPN} className="text-blue-200 hover:text-white">
+        JPN
+      </Link>
     </div>
   );
 }
