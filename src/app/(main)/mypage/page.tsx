@@ -69,9 +69,9 @@ export default function MyPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-green-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto mb-4"></div>
           <p className="text-lg text-gray-600 font-medium">사용자 정보를 불러오는 중...</p>
         </div>
       </div>
@@ -80,12 +80,12 @@ export default function MyPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="max-w-md shadow-xl">
           <CardContent className="p-8 text-center">
             <p className="text-gray-600 mb-4 text-lg">사용자 정보를 불러올 수 없습니다.</p>
             <Link href="/">
-              <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
+              <Button className="bg-blue-600 hover:bg-blue-700">
                 홈으로 돌아가기
               </Button>
             </Link>
@@ -96,37 +96,33 @@ export default function MyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+    <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* 헤더 */}
-        <div className="mb-8">
-          <Link href="/">
-            <Button variant="ghost" className="mb-4 hover:bg-green-100">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              홈으로
-            </Button>
-          </Link>
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">
+        {/* 페이지 제목 - 정부 스타일 */}
+        <div className="mb-8 bg-white border-l-4 border-blue-600 p-6 rounded-lg shadow-sm">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             마이페이지
           </h1>
-          <p className="text-lg text-gray-600">내 정보와 활동 내역을 확인하세요</p>
+          <p className="text-lg text-gray-600">
+            내 정보와 활동 내역을 확인하세요
+          </p>
         </div>
 
         {/* 프로필 카드 */}
-        <Card className="mb-6">
+        <Card className="mb-6 border-t-4 border-blue-600 hover:shadow-lg transition-shadow">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-xl">
               <User className="h-5 w-5" />
               프로필
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-start gap-4">
-              <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-2xl font-bold text-green-600">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-2xl font-bold text-blue-600">
                 {user.name.charAt(0)}
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-bold">{user.name}</h3>
+                <h3 className="text-xl font-bold text-gray-900">{user.name}</h3>
                 <p className="text-gray-600">{user.email}</p>
                 {user.phone && <p className="text-gray-600">{user.phone}</p>}
               </div>
@@ -164,7 +160,7 @@ export default function MyPage() {
 
         {/* 통계 카드 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card>
+          <Card className="border-t-4 border-green-600 hover:shadow-lg transition-shadow">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-gray-600">총 분류 횟수</CardTitle>
             </CardHeader>
@@ -176,7 +172,7 @@ export default function MyPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-t-4 border-blue-600 hover:shadow-lg transition-shadow">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-gray-600">이번 달 분류</CardTitle>
             </CardHeader>
@@ -188,7 +184,7 @@ export default function MyPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-t-4 border-yellow-500 hover:shadow-lg transition-shadow">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-gray-600">보유 포인트</CardTitle>
             </CardHeader>
@@ -202,9 +198,9 @@ export default function MyPage() {
         </div>
 
         {/* 최근 활동 */}
-        <Card className="mb-6">
+        <Card className="mb-6 border-t-4 border-purple-600 hover:shadow-lg transition-shadow">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-xl">
               <BarChart3 className="h-5 w-5" />
               최근 활동
             </CardTitle>
@@ -216,7 +212,7 @@ export default function MyPage() {
                 <p>아직 분류 기록이 없습니다.</p>
                 <p className="text-sm mt-2">쓰레기를 분류하고 포인트를 적립해보세요!</p>
                 <Link href="/classify">
-                  <Button className="mt-4 bg-green-600 hover:bg-green-700">
+                  <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
                     지금 분류하기
                   </Button>
                 </Link>
@@ -226,10 +222,10 @@ export default function MyPage() {
                 {recentLogs.map((log) => (
                   <div
                     key={log.id}
-                    className="flex justify-between items-center p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex justify-between items-center p-4 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     <div className="flex-1">
-                      <div className="font-semibold">{log.detected_item}</div>
+                      <div className="font-semibold text-gray-900">{log.detected_item}</div>
                       <div className="text-sm text-gray-600">{log.category}</div>
                       <div className="text-xs text-gray-500 mt-1">
                         {formatDate(log.created_at)}
@@ -249,24 +245,24 @@ export default function MyPage() {
         </Card>
 
         {/* 빠른 링크 */}
-        <Card>
+        <Card className="border-t-4 border-gray-600 hover:shadow-lg transition-shadow">
           <CardHeader>
-            <CardTitle>빠른 링크</CardTitle>
+            <CardTitle className="text-xl">빠른 링크</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Link href="/classify">
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full border-blue-600 text-blue-600 hover:bg-blue-50">
                 쓰레기 분류하기
               </Button>
             </Link>
             <Link href="/points">
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full border-yellow-600 text-yellow-600 hover:bg-yellow-50">
                 <Gift className="mr-2 h-4 w-4" />
                 포인트 확인
               </Button>
             </Link>
             <Link href="/schedule">
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full border-green-600 text-green-600 hover:bg-green-50">
                 <Calendar className="mr-2 h-4 w-4" />
                 배출 일정 보기
               </Button>
