@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, User, MapPin, Gift, BarChart3, Calendar, Languages } from 'lucide-react';
@@ -98,14 +99,28 @@ export default function MyPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* 페이지 제목 - 정부 스타일 */}
-        <div className="mb-8 bg-white border-l-4 border-blue-600 p-6 rounded-lg shadow-sm">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            마이페이지
-          </h1>
-          <p className="text-lg text-gray-600">
-            내 정보와 활동 내역을 확인하세요
-          </p>
+        {/* 페이지 제목 - 정부 스타일 with Image */}
+        <div className="mb-8 bg-white border-l-4 border-blue-600 rounded-lg shadow-sm overflow-hidden">
+          <div className="relative h-48 w-full">
+            <Image
+              src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=400&fit=crop"
+              alt="마이페이지"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
+            <div className="absolute inset-0 flex items-center px-6">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  마이페이지
+                </h1>
+                <p className="text-lg text-white/90">
+                  내 정보와 활동 내역을 확인하세요
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 프로필 카드 */}

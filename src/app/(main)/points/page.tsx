@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Gift, TrendingUp, Calendar } from 'lucide-react';
@@ -67,14 +68,28 @@ export default function PointsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* 페이지 제목 - 정부 스타일 */}
-        <div className="mb-8 bg-white border-l-4 border-blue-600 p-6 rounded-lg shadow-sm">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            포인트
-          </h1>
-          <p className="text-lg text-gray-600">
-            올바른 분리수거로 적립한 포인트를 확인하세요
-          </p>
+        {/* 페이지 제목 - 정부 스타일 with Image */}
+        <div className="mb-8 bg-white border-l-4 border-blue-600 rounded-lg shadow-sm overflow-hidden">
+          <div className="relative h-48 w-full">
+            <Image
+              src="https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=1200&h=400&fit=crop"
+              alt="포인트 리워드"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
+            <div className="absolute inset-0 flex items-center px-6">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  포인트
+                </h1>
+                <p className="text-lg text-white/90">
+                  올바른 분리수거로 적립한 포인트를 확인하세요
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 포인트 요약 */}

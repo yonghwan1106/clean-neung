@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -165,38 +166,50 @@ export default function Home() {
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl">
-                <div className="space-y-4">
-                  <div className="bg-white rounded-xl p-6 shadow-lg">
-                    <div className="flex items-center gap-4">
-                      <div className="bg-green-100 p-3 rounded-lg">
-                        <Recycle className="h-8 w-8 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-600">금일 분류</p>
-                        <p className="text-3xl font-bold text-gray-900">567건</p>
+              <div className="relative">
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="relative h-64 w-full">
+                    <Image
+                      src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&h=600&fit=crop"
+                      alt="재활용 분리수거"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  </div>
+                  <div className="p-6 space-y-4 bg-white">
+                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                      <div className="flex items-center gap-4">
+                        <div className="bg-green-100 p-3 rounded-lg">
+                          <Recycle className="h-6 w-6 text-green-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">금일 분류</p>
+                          <p className="text-2xl font-bold text-gray-900">567건</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="bg-white rounded-xl p-6 shadow-lg">
-                    <div className="flex items-center gap-4">
-                      <div className="bg-blue-100 p-3 rounded-lg">
-                        <Users className="h-8 w-8 text-blue-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-600">활성 사용자</p>
-                        <p className="text-3xl font-bold text-gray-900">1,234명</p>
+                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                      <div className="flex items-center gap-4">
+                        <div className="bg-blue-100 p-3 rounded-lg">
+                          <Users className="h-6 w-6 text-blue-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">활성 사용자</p>
+                          <p className="text-2xl font-bold text-gray-900">1,234명</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="bg-white rounded-xl p-6 shadow-lg">
-                    <div className="flex items-center gap-4">
-                      <div className="bg-yellow-100 p-3 rounded-lg">
-                        <Award className="h-8 w-8 text-yellow-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-600">적립 포인트</p>
-                        <p className="text-3xl font-bold text-gray-900">12,340P</p>
+                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                      <div className="flex items-center gap-4">
+                        <div className="bg-yellow-100 p-3 rounded-lg">
+                          <Award className="h-6 w-6 text-yellow-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">적립 포인트</p>
+                          <p className="text-2xl font-bold text-gray-900">12,340P</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -221,15 +234,26 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* 시민 서비스 */}
-            <Card className="hover:shadow-xl transition-all border-t-4 border-blue-600">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="bg-blue-100 p-3 rounded-lg">
-                    <Users className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <Badge variant="secondary">시민</Badge>
+            <Card className="hover:shadow-xl transition-all border-t-4 border-blue-600 overflow-hidden">
+              <div className="relative h-48 w-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&h=400&fit=crop"
+                  alt="시민 서비스"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <Badge className="bg-white/90 text-blue-600 border-0">시민</Badge>
                 </div>
-                <CardTitle className="text-2xl">시민 서비스</CardTitle>
+              </div>
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-blue-100 p-2 rounded-lg">
+                    <Users className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <CardTitle className="text-xl">시민 서비스</CardTitle>
+                </div>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
@@ -254,15 +278,26 @@ export default function Home() {
             </Card>
 
             {/* 관광객 서비스 */}
-            <Card className="hover:shadow-xl transition-all border-t-4 border-green-600">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="bg-green-100 p-3 rounded-lg">
-                    <MapPin className="h-8 w-8 text-green-600" />
-                  </div>
-                  <Badge variant="secondary">관광객</Badge>
+            <Card className="hover:shadow-xl transition-all border-t-4 border-green-600 overflow-hidden">
+              <div className="relative h-48 w-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?w=600&h=400&fit=crop"
+                  alt="관광객 서비스"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <Badge className="bg-white/90 text-green-600 border-0">관광객</Badge>
                 </div>
-                <CardTitle className="text-2xl">관광객 서비스</CardTitle>
+              </div>
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-green-100 p-2 rounded-lg">
+                    <MapPin className="h-6 w-6 text-green-600" />
+                  </div>
+                  <CardTitle className="text-xl">관광객 서비스</CardTitle>
+                </div>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
@@ -287,15 +322,26 @@ export default function Home() {
             </Card>
 
             {/* 관리자 서비스 */}
-            <Card className="hover:shadow-xl transition-all border-t-4 border-purple-600">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="bg-purple-100 p-3 rounded-lg">
-                    <Building2 className="h-8 w-8 text-purple-600" />
-                  </div>
-                  <Badge variant="secondary">관리자</Badge>
+            <Card className="hover:shadow-xl transition-all border-t-4 border-purple-600 overflow-hidden">
+              <div className="relative h-48 w-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
+                  alt="관리자 서비스"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <Badge className="bg-white/90 text-purple-600 border-0">관리자</Badge>
                 </div>
-                <CardTitle className="text-2xl">관리자 서비스</CardTitle>
+              </div>
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-purple-100 p-2 rounded-lg">
+                    <Building2 className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <CardTitle className="text-xl">관리자 서비스</CardTitle>
+                </div>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">

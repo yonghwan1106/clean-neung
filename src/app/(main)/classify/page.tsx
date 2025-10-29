@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { ImageUpload } from '@/components/classify/ImageUpload';
 import { ClassificationResult } from '@/components/classify/ClassificationResult';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
@@ -75,14 +76,28 @@ export default function ClassifyPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* 페이지 제목 */}
-        <div className="mb-8 bg-white border-l-4 border-blue-600 p-6 rounded-lg shadow-sm">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            AI 쓰레기 분류
-          </h1>
-          <p className="text-lg text-gray-600">
-            사진을 업로드하면 AI가 자동으로 쓰레기를 분류하고 배출 방법을 안내합니다
-          </p>
+        {/* 페이지 제목 with Image */}
+        <div className="mb-8 bg-white border-l-4 border-blue-600 rounded-lg shadow-sm overflow-hidden">
+          <div className="relative h-48 w-full">
+            <Image
+              src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=400&fit=crop"
+              alt="AI 쓰레기 분류"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
+            <div className="absolute inset-0 flex items-center px-6">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  AI 쓰레기 분류
+                </h1>
+                <p className="text-lg text-white/90">
+                  사진을 업로드하면 AI가 자동으로 쓰레기를 분류하고 배출 방법을 안내합니다
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 상태별 렌더링 */}
