@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Phone, Leaf, Globe, LogIn, UserPlus, User, LogOut, Camera, Calendar, Gift, Shield } from "lucide-react";
+import { Phone, Leaf, Globe, LogIn, UserPlus, User, LogOut, Camera, Calendar, Gift, Shield, Info } from "lucide-react";
 import { useState } from "react";
 
 interface LanguageSelectorProps {
@@ -118,6 +118,10 @@ export function PageHeader() {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               <div className="flex">
+                <Link href="/about" className="px-6 py-4 hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium">
+                  <Info className="h-4 w-4" />
+                  프로젝트 소개
+                </Link>
                 <Link href="/classify" className="px-6 py-4 hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium">
                   <Camera className="h-4 w-4" />
                   AI 분류하기

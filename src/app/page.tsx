@@ -11,7 +11,7 @@ import {
   Users, ArrowRight, Bell, FileText, Phone,
   Leaf, Globe, Award, Shield, Zap, Heart,
   LogIn, UserPlus, User, LogOut, ChevronRight,
-  Building2, MessageSquare, TrendingUp, Clock
+  Building2, MessageSquare, TrendingUp, Clock, Info
 } from "lucide-react";
 
 export default function Home() {
@@ -109,6 +109,10 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               <div className="flex">
+                <Link href="/about" className="px-6 py-4 hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium">
+                  <Info className="h-4 w-4" />
+                  프로젝트 소개
+                </Link>
                 <Link href="/classify" className="px-6 py-4 hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium">
                   <Camera className="h-4 w-4" />
                   AI 분류하기
@@ -581,9 +585,12 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
-            <p>© 2025 강릉시청. All rights reserved.</p>
-            <p className="mt-2">본 플랫폼은 강릉시 환경 개선을 위해 운영됩니다.</p>
+          <div className="border-t border-gray-700 pt-8 text-center text-sm">
+            <div className="mb-4 p-3 bg-blue-900 rounded-lg inline-block">
+              <p className="text-blue-200 font-semibold">🏆 2025년 강릉시 시민 아이디어 공모전 출품작</p>
+            </div>
+            <p className="text-gray-500">© 2025 강릉시청. All rights reserved.</p>
+            <p className="mt-2 text-gray-500">본 플랫폼은 강릉시 환경 개선을 위해 운영됩니다.</p>
           </div>
         </div>
       </footer>
