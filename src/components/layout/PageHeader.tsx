@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Phone, Leaf, Globe, LogIn, UserPlus, User, LogOut, Camera, Calendar, Gift } from "lucide-react";
+import { Phone, Leaf, Globe, LogIn, UserPlus, User, LogOut, Camera, Calendar, Gift, Shield } from "lucide-react";
 import { useState } from "react";
 
 interface LanguageSelectorProps {
@@ -58,6 +58,10 @@ export function PageHeader() {
               {session ? (
                 <>
                   <span className="text-blue-200">{session.user?.name}님</span>
+                  <Link href="/admin" className="hover:text-blue-200 flex items-center gap-1">
+                    <Shield className="h-3 w-3" />
+                    관리자
+                  </Link>
                   <Link href="/mypage" className="hover:text-blue-200 flex items-center gap-1">
                     <User className="h-3 w-3" />
                     마이페이지
