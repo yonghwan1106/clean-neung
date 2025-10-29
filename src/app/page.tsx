@@ -146,15 +146,10 @@ export default function Home() {
         <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="flex flex-col gap-3 mb-6">
-                <Badge className="bg-yellow-400 text-yellow-900 border-yellow-500 hover:bg-yellow-300 font-bold text-sm inline-flex items-center gap-1 w-fit">
-                  <Award className="h-4 w-4" />
-                  🏆 2025년 강릉시 시민 아이디어 공모전 출품작
-                </Badge>
-                <Badge className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm w-fit">
-                  강릉시 공식 AI 플랫폼
-                </Badge>
-              </div>
+              <Badge className="mb-6 bg-yellow-400 text-yellow-900 border-yellow-500 hover:bg-yellow-300 font-bold text-sm inline-flex items-center gap-1 w-fit">
+                <Award className="h-4 w-4" />
+                🏆 2025년 강릉시 시민 아이디어 공모전 출품작
+              </Badge>
               <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
                 사진 한 장으로<br />
                 쓰레기 분류
