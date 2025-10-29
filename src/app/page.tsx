@@ -49,6 +49,10 @@ export default function Home() {
               {session ? (
                 <>
                   <span className="text-blue-200">{session.user?.name}님</span>
+                  <Link href="/admin" className="hover:text-blue-200 flex items-center gap-1">
+                    <Shield className="h-3 w-3" />
+                    관리자
+                  </Link>
                   <Link href="/mypage" className="hover:text-blue-200 flex items-center gap-1">
                     <User className="h-3 w-3" />
                     마이페이지
