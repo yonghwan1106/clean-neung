@@ -14,7 +14,7 @@ export default function SchedulePage() {
         <div className="mb-8 bg-white border-l-4 border-blue-600 rounded-lg shadow-sm overflow-hidden">
           <div className="relative h-48 w-full">
             <Image
-              src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1200&h=400&fit=crop"
+              src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=1200&h=400&fit=crop"
               alt="쓰레기 배출 일정"
               fill
               className="object-cover"
