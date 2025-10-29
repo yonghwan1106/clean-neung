@@ -20,16 +20,19 @@ AI 기반 강릉 스마트 분리수거 플랫폼
 
 ## 주요 기능
 
-- 🤖 **AI 자동 분류**: Claude 4.0 vision을 활용한 쓰레기 자동 인식
+- 🤖 **AI 자동 분류**: Claude 4.5 Sonnet + Naver Clova를 활용한 쓰레기 자동 인식
 - 📅 **배출 일정 안내**: 강릉시 지역별 배출 일정 자동 표시
 - 🎁 **포인트 시스템**: 올바른 분리수거 시 포인트 적립
 - 📱 **PWA 지원**: 앱 설치 없이 모바일에서 바로 사용 가능
-- 🌍 **다국어 지원** (Phase 2): 한국어, 영어, 중국어, 일본어
+- 🌍 **다국어 지원**: 한국어, 영어, 중국어, 일본어
+- 👮 **관리자 대시보드**: 불법 투기 신고 관리, 쓰레기통 위치 관리, 사용자 통계
 
 ## 기술 스택
 
-- **Frontend**: Next.js 15, TypeScript, Tailwind CSS, shadcn/ui
-- **Backend**: Next.js API Routes, Claude API, Google Sheets API
+- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui
+- **Backend**: Next.js API Routes, NextAuth v5
+- **AI**: Claude 4.5 Sonnet, Naver Clova Vision API
+- **Database**: Google Sheets API
 - **Deployment**: Vercel
 
 ## 시작하기
@@ -76,26 +79,35 @@ src/
 
 ## 개발 로드맵
 
-### Phase 1 (MVP) - 완료율 85%
+### Phase 1 (MVP) - 완료 ✅
 - [x] 프로젝트 초기 설정
 - [x] Google Sheets API 통합
-- [x] AI 분류 API 개발
+- [x] AI 분류 API 개발 (Claude + Naver Clova)
 - [x] 홈페이지 및 기본 레이아웃
 - [x] 배출 일정 페이지
 - [x] 포인트 시스템
 - [x] 마이페이지
 - [x] 모바일 네비게이션
 - [x] Vercel 프로덕션 배포
-- [ ] 이미지 업로드 UI
-- [ ] 인증 시스템 (NextAuth.js)
+- [x] 이미지 업로드 UI
+- [x] 인증 시스템 (NextAuth v5)
 
-### Phase 2 - 추후
-- [ ] 불법 투기 신고
-- [ ] 다국어 지원
-- [ ] 관리자 대시보드
+### Phase 2 (Enhanced Features) - 완료 ✅
+- [x] 다국어 지원 (한국어, 영어, 중국어, 일본어)
+- [x] 관리자 대시보드
+- [x] 불법 투기 신고 관리
+- [x] 쓰레기통 위치 관리
+- [x] 사용자 통계 및 관리
+- [x] 프롬프트 엔지니어링을 통한 AI 정확도 개선
+- [x] Naver Clova Vision API 통합
+
+### Phase 3 - 추후
+- [ ] 실시간 쓰레기통 만원 알림
+- [ ] 커뮤니티 챌린지 및 리더보드
 - [ ] 커스텀 도메인 (cleanneung.kr)
 - [ ] Google Analytics
 - [ ] Sentry 에러 모니터링
+- [ ] PWA 매니페스트 및 서비스 워커
 
 ## 문서
 

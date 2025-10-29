@@ -1,48 +1,73 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { GANGNEUNG_WASTE_GUIDE } from '@/lib/constants/wasteCategories';
+import { enhanceWithNaverDetection } from './naver-clova';
 import type { ClassificationResult } from '@/lib/types/waste';
 
 const anthropic = new Anthropic({
   apiKey: process.env.CLAUDE_API_KEY || '',
 });
 
-export async function classifyWasteImage(imageBase64: string): Promise<ClassificationResult> {
+export async function classifyWasteImage(imageBase64: string, language: string = 'ko'): Promise<ClassificationResult> {
   try {
-    const prompt = `${GANGNEUNG_WASTE_GUIDE}
+    // First, try to enhance with Naver Clova detection
+    const naverEnhancement = await enhanceWithNaverDetection(imageBase64);
 
-당신은 쓰레기 분리수거 전문가입니다.
-제공된 이미지를 분석하여 다음 정보를 JSON 형식으로 제공하세요.
+    let additionalContext = '';
+    if (naverEnhancement.naverDetections && naverEnhancement.suggestedCategories.length > 0) {
+      additionalContext = `\n\nADDITIONAL CONTEXT FROM KOREAN AI MODEL:
+Detected object types: ${naverEnhancement.suggestedCategories.join(', ')}
+Please consider this information along with your own analysis.`;
+    }
 
-이미지에서 감지된 물품을 정확히 식별하고, 강릉시 쓰레기 분류 기준에 따라 5가지 가능한 분류 방법과 각각의 확률을 제시하세요.
+    const prompt = `${GANGNEUNG_WASTE_GUIDE}${additionalContext}
 
-응답 형식:
+You are an expert in waste sorting and recycling. Analyze the provided image carefully and classify the waste item according to Gangneung City's waste disposal guidelines.
+
+ANALYSIS STEPS:
+1. Identify the specific item(s) in the image with high precision
+2. Check the material composition (plastic type, paper quality, metal type, etc.)
+3. Look for recycling symbols or material codes (PET, PP, PE, PS, PVC, etc.)
+4. Consider the item's condition (clean, dirty, mixed materials)
+5. Apply Gangneung City's specific disposal rules
+
+IMPORTANT CLASSIFICATION RULES:
+- PET bottles: Must remove label, separate cap, empty contents, and crush
+- Mixed materials: If item has multiple materials that can't be separated → General waste
+- Contaminated recyclables: Even if recyclable material, if dirty/greasy → General waste
+- Food containers: Must be washed clean; if not cleanable → General waste
+- Styrofoam: Clean white styrofoam → Recyclable; colored or dirty → General waste
+
+Response format (JSON only):
 {
-  "detected_item": "감지된 물품명 (예: 페트병, 비닐봉지 등)",
+  "detected_item": "Specific item name (e.g., PET bottle, plastic container, paper box)",
+  "material_analysis": "Detailed material composition and condition",
   "possible_classifications": [
     {
-      "category": "분류 카테고리 (예: 재활용-플라스틱)",
-      "disposal_method": "구체적인 배출 방법",
+      "category": "Classification category (e.g., 재활용 (플라스틱))",
+      "disposal_method": "Specific disposal instructions",
       "disposal_days": ["월요일", "목요일"],
       "confidence": 95,
-      "special_notes": "특이사항이 있다면 기재"
+      "reasoning": "Why this classification applies",
+      "special_notes": "Any special considerations"
     }
   ],
   "best_classification": {
-    "category": "가장 확률이 높은 분류 카테고리",
-    "disposal_method": "구체적인 배출 방법",
+    "category": "Most likely classification category",
+    "disposal_method": "Specific disposal instructions with step-by-step guide",
     "disposal_days": ["월요일", "목요일"],
     "confidence": 95,
-    "special_notes": "특이사항이 있다면 기재"
+    "reasoning": "Detailed explanation of why this is the best classification",
+    "special_notes": "Important notes for proper disposal"
   }
 }
 
-강릉시 배출 규정:
-- 재활용: 월요일, 목요일
-- 종량제봉투: 화요일, 금요일
-- 음식물: 매일
-- 대형폐기물: 별도 신고
+Gangneung City disposal schedule:
+- Recyclables: Monday, Thursday
+- General waste (Volume-based bags): Tuesday, Friday
+- Food waste: Every day (by 6 PM)
+- Large waste: Requires separate registration
 
-중요: 반드시 JSON 형식으로만 응답하세요. 다른 텍스트는 포함하지 마세요.`;
+CRITICAL: Return ONLY valid JSON. No additional text, explanations, or markdown formatting.`;
 
     const response = await anthropic.messages.create({
       model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
