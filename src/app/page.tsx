@@ -150,8 +150,9 @@ export default function Home() {
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-6 text-lg font-bold" asChild>
-                  <Link href="/schedule">
+                <Button size="lg" variant="outline" className="border-2 border-white text-white bg-white/10 hover:bg-white hover:text-blue-600 px-8 py-6 text-lg font-bold backdrop-blur-sm" asChild>
+                  <Link href="/schedule" className="flex items-center gap-2">
+                    <Calendar className="h-5 w-5" />
                     배출일정 보기
                   </Link>
                 </Button>

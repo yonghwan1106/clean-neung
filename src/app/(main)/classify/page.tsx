@@ -6,10 +6,7 @@ import { ClassificationResult } from '@/components/classify/ClassificationResult
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
 import type { ClassifyResponse } from '@/lib/types/api';
-import { fileToBase64 } from '@/lib/utils/image';
 
 type PageState = 'upload' | 'loading' | 'result' | 'error';
 
@@ -76,20 +73,16 @@ export default function ClassifyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+    <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* 헤더 */}
-        <div className="mb-8">
-          <Link href="/">
-            <Button variant="ghost" className="mb-4 hover:bg-green-100">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              홈으로
-            </Button>
-          </Link>
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">
-            쓰레기 분류
+        {/* 페이지 제목 */}
+        <div className="mb-8 bg-white border-l-4 border-blue-600 p-6 rounded-lg shadow-sm">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            AI 쓰레기 분류
           </h1>
-          <p className="text-lg text-gray-600">AI가 사진을 분석하여 정확한 분리수거 방법을 안내합니다</p>
+          <p className="text-lg text-gray-600">
+            사진을 업로드하면 AI가 자동으로 쓰레기를 분류하고 배출 방법을 안내합니다
+          </p>
         </div>
 
         {/* 상태별 렌더링 */}
@@ -103,7 +96,7 @@ export default function ClassifyPage() {
             {selectedImage && (
               <Button
                 onClick={handleClassify}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 shadow-lg shadow-green-200"
+                className="w-full bg-blue-600 hover:bg-blue-700 shadow-lg"
                 size="lg"
               >
                 🤖 AI 분류 시작하기
@@ -142,13 +135,27 @@ export default function ClassifyPage() {
         {state === 'upload' && !selectedImage && (
           <Card className="mt-8 bg-blue-50 border-blue-200">
             <CardHeader>
-              <CardTitle className="text-blue-900">사용 방법</CardTitle>
+              <CardTitle className="text-blue-900 flex items-center gap-2">
+                <span>💡</span> 사용 방법
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm text-blue-900">
-              <p>1. 📸 쓰레기 사진을 촬영하거나 파일을 선택하세요</p>
-              <p>2. 🤖 AI가 자동으로 쓰레기를 분석합니다</p>
-              <p>3. 📋 분류 결과와 배출 방법을 확인하세요</p>
-              <p>4. 🎁 올바른 분류로 포인트를 적립하세요</p>
+            <CardContent className="space-y-3 text-sm text-blue-900">
+              <div className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                <p>📸 쓰레기 사진을 촬영하거나 파일을 선택하세요</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                <p>🤖 AI가 자동으로 쓰레기를 분석합니다</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                <p>📋 분류 결과와 배출 방법을 확인하세요</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                <p>🎁 올바른 분류로 포인트를 적립하세요</p>
+              </div>
             </CardContent>
           </Card>
         )}
